@@ -4,9 +4,25 @@ module.exports = function(app){
     });
 
     app.post('/noticias/salvar', function(req, res){
-        var noticias = req.body;
-        
-        res.send(noticias)
+        var noticia = req.body; 
+
+        console.log(noticia);
+
+       
+
+      
+
+        var connection = app.config.dbConnection();
+        var noticiasModel = new app.app.models.NoticiasDAO(connection);
+    
+        noticiasModel.salvarNoticia(noticia, function(erro, result){      
+            console.log(erro);
+
+            res.redirect("/noticias");
+        });
     });
+
+
+   
 }
 
