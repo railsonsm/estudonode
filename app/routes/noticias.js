@@ -3,14 +3,15 @@
 module.exports = function(app){
    
     app.get('/noticias', function(req, res){
-        var connection = app.config.dbConnection();
-        var noticiasModel = new app.app.models.NoticiasDAO(connection);
+        
+      app.app.controllers.noticias.noticias(app, req, res);
+        //res.render("noticias/noticias");
+    });
 
-        noticiasModel.getNoticias(function(erro, result){          
-            res.render("noticias/noticias", {noticias : result});
-        });
-
-      
+    app.get('/noticia', function(req, res){
+       
+        app.app.controllers.noticias.noticia(app, req, res);
+        //connection.query("select * from noticias where id_noticias = 1", f);
         //res.render("noticias/noticias");
     });
 }
